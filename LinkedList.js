@@ -33,4 +33,75 @@ class LinkedList{
         return this
 
     }
+
+    delete(value){
+
+        if(!this.head) return 
+
+        let deleteNode=null;
+        // check if first node is to be deleted
+        if(this.head && this.head.value===value){
+            deleteNode=this.head
+            this.head= this.head.next; 
+            return 
+        }
+
+        // create a place holder for current node 
+        let currentNode= this.head; 
+
+        if(currentNode.next!=null){
+            while(currentNode.next){
+                if(currentNode.next.value===value){
+                    // if last element to be deleted
+                    if(this.tail===currentNode){
+                        this.tail=currentNode
+                    }
+                    deleteNode= currentNode.next; 
+                    currentNode.next= currentNode.next.next;                     
+                    return
+                }
+                else{
+                    currentNode=currentNode.next
+                }
+            }
+        }
+
+        return 
+
+    }
+
+    delteTail(){
+        if(this.head===this.tail){
+            this.head=null; 
+            this.tail=null; 
+        }
+        let deleteNode=this.tail; 
+        let currentNode=this.head; 
+
+        while(currentNode.next){
+            if(!currentNode.next.next){
+                currentNode.next=null; 
+            }else{
+                currentNode=currentNode.next
+            }
+        }
+        this.tail=currentNode;
+        return deleteNode
+    }
+
+    deleteHead(){
+        if(!this.head){
+            return null
+        }
+        let deletedNode = this.head; 
+        if(!this.head.next){
+            this.head=null; 
+            this.tail=null; 
+            return
+        }
+
+        this.head= this.head.next; 
+        return deletedNode;
+                
+    }
 }
